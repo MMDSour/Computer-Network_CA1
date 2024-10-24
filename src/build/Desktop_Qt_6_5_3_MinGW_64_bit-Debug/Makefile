@@ -356,6 +356,7 @@ Makefile: ../../src.pro E:/Qt/6.5.3/mingw_64/mkspecs/win32-g++/qmake.conf E:/Qt/
 		../../src.pro \
 		E:/Qt/6.5.3/mingw_64/lib/Qt6Quick.prl \
 		E:/Qt/6.5.3/mingw_64/lib/Qt6OpenGL.prl \
+		E:/Qt/6.5.3/mingw_64/lib/Qt6Multimedia.prl \
 		E:/Qt/6.5.3/mingw_64/lib/Qt6Widgets.prl \
 		E:/Qt/6.5.3/mingw_64/lib/Qt6Gui.prl \
 		E:/Qt/6.5.3/mingw_64/lib/Qt6QmlModels.prl \
@@ -651,6 +652,7 @@ E:/Qt/6.5.3/mingw_64/mkspecs/features/lex.prf:
 ../../src.pro:
 E:/Qt/6.5.3/mingw_64/lib/Qt6Quick.prl:
 E:/Qt/6.5.3/mingw_64/lib/Qt6OpenGL.prl:
+E:/Qt/6.5.3/mingw_64/lib/Qt6Multimedia.prl:
 E:/Qt/6.5.3/mingw_64/lib/Qt6Widgets.prl:
 E:/Qt/6.5.3/mingw_64/lib/Qt6Gui.prl:
 E:/Qt/6.5.3/mingw_64/lib/Qt6QmlModels.prl:
