@@ -4,6 +4,7 @@
 #include <QMediaDevices>
 #include <QIODevice>
 #include <QDebug>
+#include "opus.h"
 
 class AudioInput : public QIODevice{
 public:
@@ -15,6 +16,9 @@ public:
     void start();
 private:
     QAudioSource * qAudioSource;
+    OpusEncoder *opusEncoder;
+    int sampleRate;
+    int channels;
 };
 
 #endif // AUDIOINPUT_H

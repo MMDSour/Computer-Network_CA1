@@ -13,13 +13,13 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_OPENGL_LIB -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QMLINTEGRATION_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
+DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_NO_KEYWORDS -DQT_QUICK_LIB -DQT_OPENGL_LIB -DQT_MULTIMEDIA_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QMLINTEGRATION_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
 CFLAGS        = -fno-keep-inline-dllexport -O2 -Wall -Wextra -Wextra $(DEFINES)
-CXXFLAGS      = -fno-keep-inline-dllexport -O2 -std=gnu++1z -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I../../../src -I. -IE:/Qt/6.5.3/mingw_64/include -IE:/Qt/6.5.3/mingw_64/include/QtQuick -IE:/Qt/6.5.3/mingw_64/include/QtOpenGL -IE:/Qt/6.5.3/mingw_64/include/QtMultimedia -IE:/Qt/6.5.3/mingw_64/include/QtWidgets -IE:/Qt/6.5.3/mingw_64/include/QtGui -IE:/Qt/6.5.3/mingw_64/include/QtQmlModels -IE:/Qt/6.5.3/mingw_64/include/QtQml -IE:/Qt/6.5.3/mingw_64/include/QtQmlIntegration -IE:/Qt/6.5.3/mingw_64/include/QtNetwork -IE:/Qt/6.5.3/mingw_64/include/QtCore -Irelease -I/include -IE:/Qt/6.5.3/mingw_64/mkspecs/win32-g++ 
+CXXFLAGS      = -fno-keep-inline-dllexport -fstack-protector -O2 -std=gnu++1z -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
+INCPATH       = -I../../../src -I. -I../../../../Lib/libdatachannel/include -IE:/Qt/Tools/OpenSSLv3/Win_x64/include -I../../../../Lib/opus/include -IE:/Qt/6.5.3/mingw_64/include -IE:/Qt/6.5.3/mingw_64/include/QtQuick -IE:/Qt/6.5.3/mingw_64/include/QtOpenGL -IE:/Qt/6.5.3/mingw_64/include/QtMultimedia -IE:/Qt/6.5.3/mingw_64/include/QtWidgets -IE:/Qt/6.5.3/mingw_64/include/QtGui -IE:/Qt/6.5.3/mingw_64/include/QtQmlModels -IE:/Qt/6.5.3/mingw_64/include/QtQml -IE:/Qt/6.5.3/mingw_64/include/QtQmlIntegration -IE:/Qt/6.5.3/mingw_64/include/QtNetwork -IE:/Qt/6.5.3/mingw_64/include/QtCore -Irelease -I/include -IE:/Qt/6.5.3/mingw_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        E:\Qt\6.5.3\mingw_64\lib\libQt6Quick.a E:\Qt\6.5.3\mingw_64\lib\libQt6OpenGL.a E:\Qt\6.5.3\mingw_64\lib\libQt6Multimedia.a E:\Qt\6.5.3\mingw_64\lib\libQt6Widgets.a E:\Qt\6.5.3\mingw_64\lib\libQt6Gui.a E:\Qt\6.5.3\mingw_64\lib\libQt6QmlModels.a E:\Qt\6.5.3\mingw_64\lib\libQt6Qml.a E:\Qt\6.5.3\mingw_64\lib\libQt6Network.a E:\Qt\6.5.3\mingw_64\lib\libQt6Core.a -lmingw32 E:\Qt\6.5.3\mingw_64\lib\libQt6EntryPoint.a -lshell32  
+LIBS        =        -L"F:\Program Files (x86)\MMD.Soor\University\Term 7\CN\CAs\Lib\libdatachannel\Windows\Mingw64" -ldatachannel.dll -LE:\Qt\Tools\OpenSSLv3\Win_x64\bin -lcrypto-3-x64 -lssl-3-x64 -L"F:\Program Files (x86)\MMD.Soor\University\Term 7\CN\CAs\Lib\opus\Windows\Mingw64" -lopus -lws2_32 -lssp E:\Qt\6.5.3\mingw_64\lib\libQt6Quick.a E:\Qt\6.5.3\mingw_64\lib\libQt6OpenGL.a E:\Qt\6.5.3\mingw_64\lib\libQt6Multimedia.a E:\Qt\6.5.3\mingw_64\lib\libQt6Widgets.a E:\Qt\6.5.3\mingw_64\lib\libQt6Gui.a E:\Qt\6.5.3\mingw_64\lib\libQt6QmlModels.a E:\Qt\6.5.3\mingw_64\lib\libQt6Qml.a E:\Qt\6.5.3\mingw_64\lib\libQt6Network.a E:\Qt\6.5.3\mingw_64\lib\libQt6Core.a -lmingw32 E:\Qt\6.5.3\mingw_64\lib\libQt6EntryPoint.a -lshell32  
 QMAKE         = E:\Qt\6.5.3\mingw_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -102,7 +102,7 @@ compiler_moc_predefs_make_all: release/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) release\moc_predefs.h
 release/moc_predefs.h: E:/Qt/6.5.3/mingw_64/mkspecs/features/data/dummy.cpp
-	g++ -fno-keep-inline-dllexport -O2 -std=gnu++1z -Wall -Wextra -Wextra -dM -E -o release\moc_predefs.h E:\Qt\6.5.3\mingw_64\mkspecs\features\data\dummy.cpp
+	g++ -fno-keep-inline-dllexport -fstack-protector -O2 -std=gnu++1z -Wall -Wextra -Wextra -dM -E -o release\moc_predefs.h E:\Qt\6.5.3\mingw_64\mkspecs\features\data\dummy.cpp
 
 compiler_moc_header_make_all:
 compiler_moc_header_clean:
@@ -243,7 +243,10 @@ release/AudioInput.o: ../../AudioInput.cpp ../../AudioInput.h \
 		E:/Qt/6.5.3/mingw_64/include/QtCore/qset.h \
 		E:/Qt/6.5.3/mingw_64/include/QtCore/qhash.h \
 		E:/Qt/6.5.3/mingw_64/include/QtCore/qvarlengtharray.h \
-		E:/Qt/6.5.3/mingw_64/include/QtCore/q20memory.h
+		E:/Qt/6.5.3/mingw_64/include/QtCore/q20memory.h \
+		../../../../Lib/opus/include/opus.h \
+		../../../../Lib/opus/include/opus_types.h \
+		../../../../Lib/opus/include/opus_defines.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\AudioInput.o ..\..\AudioInput.cpp
 
 release/main.o: ../../main.cpp E:/Qt/6.5.3/mingw_64/include/QtGui/QGuiApplication \
@@ -425,7 +428,10 @@ release/main.o: ../../main.cpp E:/Qt/6.5.3/mingw_64/include/QtGui/QGuiApplicatio
 		E:/Qt/6.5.3/mingw_64/include/QtMultimedia/QMediaDevices \
 		E:/Qt/6.5.3/mingw_64/include/QtMultimedia/qmediadevices.h \
 		E:/Qt/6.5.3/mingw_64/include/QtCore/QIODevice \
-		E:/Qt/6.5.3/mingw_64/include/QtCore/QDebug
+		E:/Qt/6.5.3/mingw_64/include/QtCore/QDebug \
+		../../../../Lib/opus/include/opus.h \
+		../../../../Lib/opus/include/opus_types.h \
+		../../../../Lib/opus/include/opus_defines.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\..\main.cpp
 
 ####### Install
