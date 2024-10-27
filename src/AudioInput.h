@@ -14,6 +14,7 @@ public:
     void close(){return;};
     bool seek(qint64 pos){return 0;};
     void start();
+    void decodeData(const char* data);
 private:
     QAudioSource * qAudioSource;
     OpusEncoder *opusEncoder;

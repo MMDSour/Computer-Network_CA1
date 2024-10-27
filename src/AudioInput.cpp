@@ -29,6 +29,24 @@ void AudioInput::start(){
 }
 
 qint64 AudioInput::writeData(const char *data, qint64 len){
+    decodeData(data);
     qDebug() << "Received audio data of size:" << len;
     return len;
+}
+
+void AudioInput::decodeData(const char *data){
+    const int maxPacketSize = 4000;
+    unsigned char encodedData[maxPacketSize];
+
+    int frameSize = sampleRate / 50;
+    int numSamples = frameSize * channels;
+    const opus_int16 *pcmData = reinterpret_cast<const opus_int16 *>(data);
+
+    int encodedBytes = opus_encode(opusEncoder, pcmData, numSamples, encodedData, maxPacketSize);
+    if (encodedBytes < 0) {
+        qDebug() << "Opus encoding error:" << opus_strerror(encodedBytes);
+        return;
+    }
+
+    qDebug() << "Encoded data size:" << encodedBytes;
 }
