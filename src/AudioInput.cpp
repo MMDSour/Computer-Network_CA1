@@ -1,7 +1,7 @@
 #include "AudioInput.h"
 
-AudioInput::AudioInput()
-    : opusEncoder(nullptr), sampleRate(48000), channels(1) {
+AudioInput::AudioInput(AudioOutput *output)
+    : opusEncoder(nullptr), sampleRate(48000), channels(1), audioOutput(output) {
 
     QAudioFormat format;
     format.setSampleRate(sampleRate);
@@ -21,32 +21,34 @@ AudioInput::AudioInput()
     }
 }
 
-void AudioInput::start(){
+void AudioInput::start() {
     qAudioSource->start(this);
     if (qAudioSource->state() != QAudio::ActiveState) {
         qDebug() << "Audio source not active. State:" << qAudioSource->state();
     }
 }
 
-qint64 AudioInput::writeData(const char *data, qint64 len){
-    decodeData(data);
+qint64 AudioInput::writeData(const char *data, qint64 len) {
     qDebug() << "Received audio data of size:" << len;
+    QByteArray encodedData = encodeData(data, len);
+    audioOutput->addData(encodedData);
     return len;
 }
 
-void AudioInput::decodeData(const char *data){
+QByteArray AudioInput::encodeData(const char *data, qint64 len) {
     const int maxPacketSize = 4000;
     unsigned char encodedData[maxPacketSize];
 
-    int frameSize = sampleRate / 50;
-    int numSamples = frameSize * channels;
     const opus_int16 *pcmData = reinterpret_cast<const opus_int16 *>(data);
 
-    int encodedBytes = opus_encode(opusEncoder, pcmData, numSamples, encodedData, maxPacketSize);
+    int encodedBytes = opus_encode(opusEncoder, pcmData, len / sizeof(opus_int16), encodedData, maxPacketSize);
     if (encodedBytes < 0) {
         qDebug() << "Opus encoding error:" << opus_strerror(encodedBytes);
-        return;
+        return QByteArray(); 
     }
 
     qDebug() << "Encoded data size:" << encodedBytes;
+
+    return QByteArray(reinterpret_cast<const char*>(encodedData), encodedBytes);
+
 }

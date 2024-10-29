@@ -1,12 +1,12 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "AudioInput.h"
-
+#include "AudioOutput.h"
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    std::unique_ptr<AudioInput> AI = std::make_unique<AudioInput>();
+    std::unique_ptr<AudioInput> AI = std::make_unique<AudioInput>(new AudioOutput());
     AI->start();
 
 
