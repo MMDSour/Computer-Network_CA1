@@ -9,4 +9,5 @@ App::App(QObject *parent)
 void App::start()
 {
     audioInput->start();
+
 }
