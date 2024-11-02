@@ -69,10 +69,12 @@ Window {
                 if(pushed){
                     Material.background = "red"
                     text = "End Call"
+                    app.start()
                 }
                 else{
                     Material.background = "green"
                     text = "Call"
+                    // manager.endCall()
                     textfield.clear()
                 }
             }
