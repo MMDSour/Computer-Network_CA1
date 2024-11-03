@@ -4,11 +4,11 @@
 
 #include <QObject>
 #include <QRandomGenerator>
-#include "AudioInput.h"
-#include "AudioOutput.h"
+#include "Audio/AudioInput.h"
+#include "Audio/AudioOutput.h"
 #include <QMutex>
 #include "SocketIO/sio_client.h"
-#include "webrtc.h"
+#include "Network/webrtc.h"
 using namespace std;
 
 class Client : public QObject

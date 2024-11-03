@@ -1,4 +1,3 @@
-
 #include "client.h"
 #include <QDebug>
 #include <QJsonDocument>
