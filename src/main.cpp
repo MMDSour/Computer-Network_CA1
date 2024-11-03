@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     QString qmlPath;
 
 #ifdef Q_OS_MAC
-    qmlPath = "../../../../../Main.qml";  // Mac-specific path
+    qmlPath = "../../../../../UI/Main.qml";  // Mac-specific path
 #elif defined(Q_OS_WIN)
     qmlPath = "../../UI/Main.qml";  // Windows-specific path
 #else
