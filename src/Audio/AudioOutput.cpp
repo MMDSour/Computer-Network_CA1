@@ -22,14 +22,11 @@ AudioOutput::AudioOutput(QObject *parent)
 
 void AudioOutput::addData(const QByteArray &data) {
     QMutexLocker locker(&mutex);
-    qDebug() << "Adding data of size:" << data;
     audioQueue.enqueue(data);
     Q_EMIT newPacket();
 }
 
 void AudioOutput::play() {
-
-    // QMutexLocker locker(mutex);
     while (!audioQueue.isEmpty()) {
         QByteArray audioData = audioQueue.dequeue();
 

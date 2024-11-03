@@ -1,10 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "AudioInput.h"
-#include "AudioOutput.h"
-#include "Client.h"
-#include "App.h"
+#include "Network/Client.h"
+#include "App/App.h"
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -18,7 +16,7 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_MAC
     qmlPath = "../../../../../Main.qml";  // Mac-specific path
 #elif defined(Q_OS_WIN)
-    qmlPath = "../../Main.qml";  // Windows-specific path
+    qmlPath = "../../UI/Main.qml";  // Windows-specific path
 #else
     qmlPath = QCoreApplication::applicationDirPath() + "/Main.qml";  // Default path
 #endif

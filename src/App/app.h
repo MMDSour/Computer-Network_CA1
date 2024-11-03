@@ -2,7 +2,7 @@
 #define APP_H
 
 #include <QObject>
-#include "AudioInput.h"
+#include "Audio/AudioInput.h"
 
 class App : public QObject
 {
