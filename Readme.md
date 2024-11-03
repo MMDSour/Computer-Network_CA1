@@ -12,6 +12,7 @@
 8. [WebRTC and Coturn Explanation](#webrtc-and-coturn-explanation)
 9. [Usage](#usage)
 10. [Running The App](#running-the-app)
+11. [Difficulties and Challenges Faced](#difficulties-and-challenges-faced)
 
 ---
 
@@ -30,8 +31,6 @@ The main goal is to establish a voice communication channel between two devices 
   - **Opus codec** for audio encoding and decoding
   - **Coturn** (optional) as a TURN server for NAT traversal
 
-## Project Structure
-```plaintext
 ## Project Structure
 ```plaintext
 📂 Project_Root
