@@ -16,11 +16,12 @@ class Client : public QObject
     Q_OBJECT
 
 public:
-    explicit Client(QObject *parent = nullptr, string serverUrl = "https://localhost:8080", QString id = "", bool isOfferer = false);
+    explicit Client(QObject *parent = nullptr, string serverUrl = "https://localhost:8080", QString id = "", bool isOfferer = false, QString peerId = "");
     void connectToServer(const std::string& url);
     void sendRegisterRequest();
     void sendSdp(const string &clientId);
     void startCall(QString peerId);
+    bool getIsOfferer() {return isOfferer;}
 
 private:
     sio::client socket;
@@ -31,7 +32,7 @@ private:
 
     AudioInput* audioInput;
     AudioOutput* audioOutput;
-    QString peerId;
+    QString peerId_;
     QString id;
     bool isOfferer;
     WebRTC* webrtc;

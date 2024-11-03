@@ -7,9 +7,13 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    Client* c1 = new Client(nullptr, "https://localhost:8080", "peer1", true);
-    Client* c2 = new Client(nullptr, "https://localhost:8080", "peer2", false);
-    c1->startCall("peer2");
+    if (stoi(argv[1]) == 1)
+    {
+        Client* c = new Client(nullptr, "https://localhost:8080", "peer1", true, "peer2");
+        c->startCall("peer2");
+    }
+    else if (stoi(argv[1]) == 0)
+        Client* c = new Client(nullptr, "https://localhost:8080", "peer2", false, "peer1");
 
     QString qmlPath;
 

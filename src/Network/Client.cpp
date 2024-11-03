@@ -3,13 +3,14 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-Client::Client(QObject *parent, string serverUrl_, QString id_, bool isOfferer_) : QObject(parent)
+Client::Client(QObject *parent, string serverUrl_, QString id_, bool isOfferer_, QString peerId) : QObject(parent)
 {
     webrtc = new WebRTC (this);
     audioInput = new AudioInput(this);
     audioOutput = new AudioOutput();
     id = id_;
     isOfferer = isOfferer_;
+    peerId_ = peerId;
 
     connect(webrtc, &WebRTC::offerIsReady, this, &Client::onOfferIsReady);
     connect(webrtc, &WebRTC::answerIsReady, this, &Client::onAnswerIsReady);
@@ -126,13 +127,12 @@ void Client::onMessageReceived(const std::string& message)
 
 void Client::onOpenedDataChannel(const QString &peerId)
 {
-    this->peerId = peerId;
     audioInput->start();
 }
 
 void Client::onDataReady(QByteArray &data)
 {
-    webrtc->sendTrack(peerId, data);
+    webrtc->sendTrack(peerId_, data);
 }
 
 void Client::onIncommingPacket(const QString &peerId, const QByteArray &data, qint64 len)
