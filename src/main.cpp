@@ -7,13 +7,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    if (stoi(argv[1]) == 1)
-    {
-        Client* c = new Client(nullptr, "https://localhost:8080", "peer1", true, "peer2");
-        c->startCall("peer2");
-    }
-    else if (stoi(argv[1]) == 0)
-        Client* c = new Client(nullptr, "https://localhost:8080", "peer2", false, "peer1");
+    bool isOfferer = stoi(argv[1]);
 
     QString qmlPath;
 
@@ -25,9 +19,9 @@ int main(int argc, char *argv[])
     qmlPath = QCoreApplication::applicationDirPath() + "/Main.qml";  // Default path
 #endif
 
-    App application;
+    App* application = new App(nullptr, isOfferer);
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty("app", &application);
+    engine.rootContext()->setContextProperty("app", application);
     engine.load(QUrl::fromLocalFile(qmlPath));
 
     if (engine.rootObjects().isEmpty())

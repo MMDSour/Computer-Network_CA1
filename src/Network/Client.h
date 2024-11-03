@@ -17,11 +17,13 @@ class Client : public QObject
 
 public:
     explicit Client(QObject *parent = nullptr, string serverUrl = "https://localhost:8080", QString id = "", bool isOfferer = false, QString peerId = "");
+    ~Client();
     void connectToServer(const std::string& url);
     void sendRegisterRequest();
     void sendSdp(const string &clientId);
     void startCall(QString peerId);
     bool getIsOfferer() {return isOfferer;}
+    QString getPeerId() { return peerId_; }
 
 private:
     sio::client socket;

@@ -6,7 +6,7 @@ Window {
     width: 280
     height: 520
     visible: true
-    title: qsTr("CA1")
+    title: app.verName
 
     Item{
         anchors.fill: parent
@@ -74,8 +74,7 @@ Window {
                 else{
                     Material.background = "green"
                     text = "Call"
-                    // manager.endCall()
-                    textfield.clear()
+                    app.end()
                 }
             }
         }

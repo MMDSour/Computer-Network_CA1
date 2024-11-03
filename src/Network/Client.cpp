@@ -39,6 +39,18 @@ Client::Client(QObject *parent, string serverUrl_, QString id_, bool isOfferer_,
     connectToServer(serverUrl_);    
 }
 
+Client::~Client()
+{
+    socket.close();
+
+    delete audioInput;
+    delete audioOutput;
+    delete webrtc;
+
+    mutex.lock();
+    mutex.unlock();
+}
+
 void Client::connectToServer(const std::string& url)
 {
     socket.connect(url);
