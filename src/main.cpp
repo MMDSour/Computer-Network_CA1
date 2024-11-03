@@ -9,11 +9,8 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    std::unique_ptr<AudioInput> AI = std::make_unique<AudioInput>(new AudioOutput());
-    // AI->start();
     Client* c1 = new Client(nullptr, "https://localhost:8080", "peer1", true);
     Client* c2 = new Client(nullptr, "https://localhost:8080", "peer2", false);
-
     c1->startCall("peer2");
 
     QString qmlPath;

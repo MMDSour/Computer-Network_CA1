@@ -3,11 +3,10 @@
 App::App(QObject *parent)
     : QObject{parent}
 {
-    this->audioInput = new AudioInput(new AudioOutput());
+    this->audioInput = new AudioInput();
 }
 
 void App::start()
 {
     audioInput->start();
-
 }

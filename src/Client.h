@@ -4,6 +4,9 @@
 
 #include <QObject>
 #include <QRandomGenerator>
+#include "AudioInput.h"
+#include "AudioOutput.h"
+#include <QMutex>
 #include "SocketIO/sio_client.h"
 #include "webrtc.h"
 using namespace std;
@@ -26,14 +29,20 @@ private:
     void onMessageReceived(const std::string& message);
 
 
+    AudioInput* audioInput;
+    AudioOutput* audioOutput;
+    QString peerId;
     QString id;
     bool isOfferer;
     WebRTC* webrtc;
+    QMutex mutex;
 
 private Q_SLOTS:
     void onOfferIsReady(const QString &peerID, const QString& description);
     void onAnswerIsReady(const QString &peerID, const QString& description);
     void onOpenedDataChannel(const QString &peerId);
+    void onDataReady(QByteArray &data);
+    void onIncommingPacket(const QString &peerId, const QByteArray &data, qint64 len);
 };
 
-#endif // CLIENT_H
+#endif

@@ -1,0 +1,15 @@
+debug/AudioInput.o
+debug/AudioOutput.o
+debug/Client.o
+debug/sio_client_impl.o
+debug/sio_packet.o
+debug/sio_client.o
+debug/sio_socket.o
+debug/app.o
+debug/main.o
+debug/webrtc.o
+debug/moc_AudioInput.o
+debug/moc_AudioOutput.o
+debug/moc_Client.o
+debug/moc_app.o
+debug/moc_webrtc.o

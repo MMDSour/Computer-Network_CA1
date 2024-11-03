@@ -32,4 +32,4 @@ private:
     OpusDecoder *opusDecoder;
 };
 
-#endif // AUDIOOUTPUT_H
+#endif

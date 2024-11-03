@@ -3,8 +3,6 @@
 
 #include <QObject>
 #include <QMap>
-
-// Build the datachannellib library and add the include path to .pro file
 #include <rtc/rtc.hpp>
 
 class WebRTC : public QObject
@@ -102,4 +100,4 @@ private:
     Q_PROPERTY(int bitRate READ bitRate WRITE setBitRate RESET resetBitRate NOTIFY bitRateChanged FINAL)
 };
 
-#endif // WEBRTC_H
+#endif

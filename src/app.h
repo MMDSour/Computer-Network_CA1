@@ -17,4 +17,4 @@ private:
     AudioInput* audioInput;
 };
 
-#endif // APP_H
+#endif

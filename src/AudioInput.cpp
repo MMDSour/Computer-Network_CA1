@@ -1,7 +1,7 @@
 #include "AudioInput.h"
 
-AudioInput::AudioInput(AudioOutput *output)
-    : opusEncoder(nullptr), sampleRate(48000), channels(1), audioOutput(output) {
+AudioInput::AudioInput(QObject *parent)
+    :opusEncoder(nullptr), sampleRate(48000), channels(1) {
 
     QAudioFormat format;
     format.setSampleRate(sampleRate);
@@ -31,24 +31,25 @@ void AudioInput::start() {
 qint64 AudioInput::writeData(const char *data, qint64 len) {
     qDebug() << "Received audio data of size:" << len;
     QByteArray encodedData = encodeData(data, len);
-    audioOutput->addData(encodedData);
+    Q_EMIT dataReady(encodedData);
     return len;
 }
 
 QByteArray AudioInput::encodeData(const char *data, qint64 len) {
     const int maxPacketSize = 4000;
-    unsigned char encodedData[maxPacketSize];
+    QByteArray encodedData(maxPacketSize, 0);
 
     const opus_int16 *pcmData = reinterpret_cast<const opus_int16 *>(data);
+    int encodedBytes = opus_encode(opusEncoder, pcmData, len / sizeof(opus_int16),
+                                   reinterpret_cast<unsigned char *>(encodedData.data()),
+                                   maxPacketSize);
 
-    int encodedBytes = opus_encode(opusEncoder, pcmData, len / sizeof(opus_int16), encodedData, maxPacketSize);
     if (encodedBytes < 0) {
         qDebug() << "Opus encoding error:" << opus_strerror(encodedBytes);
-        return QByteArray(); 
+        return QByteArray();
     }
 
+    encodedData.resize(encodedBytes);
     qDebug() << "Encoded data size:" << encodedBytes;
-
-    return QByteArray(reinterpret_cast<const char*>(encodedData), encodedBytes);
-
+    return encodedData;
 }

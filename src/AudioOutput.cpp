@@ -8,7 +8,6 @@ AudioOutput::AudioOutput(QObject *parent)
     audioFormat.setSampleRate(48000);
     audioFormat.setChannelCount(1);
     audioFormat.setSampleFormat(QAudioFormat::Int16);
-
     audioSink = new QAudioSink(QMediaDevices::defaultAudioOutput(), audioFormat, this);
     audioDevice = audioSink->start();
 
@@ -23,12 +22,14 @@ AudioOutput::AudioOutput(QObject *parent)
 
 void AudioOutput::addData(const QByteArray &data) {
     QMutexLocker locker(&mutex);
+    qDebug() << "Adding data of size:" << data;
     audioQueue.enqueue(data);
     Q_EMIT newPacket();
 }
 
 void AudioOutput::play() {
 
+    // QMutexLocker locker(mutex);
     while (!audioQueue.isEmpty()) {
         QByteArray audioData = audioQueue.dequeue();
 
